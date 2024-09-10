@@ -18,6 +18,14 @@
 단점
 
 -   production 코드가 지저분해진다
+```java
+@Operation(summary = "2. 비밀번호 찾기 -> 인증 번호 인증", description = "**성공 데이터:** 임시 토큰 쿠키 ")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "인증번호 인증 성공"),
+            @ApiResponse(responseCode = "400", description = "인증번호가 잘 못 되었습니다."),
+    })
+    ResponseEntity<?> verificationCode(VerificationCodeDto verificationCodeDto);
+```
 
 ### 2-3. RestDocs 장단점
 
@@ -43,7 +51,7 @@
 
 ### 3-1. 의존성 주입
 
-```
+```groovy
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.3'
@@ -131,7 +139,7 @@ bootJar {
 
 > 간단한 도서 CURD 서버에서 테스트를 진행했습니다.
 
-```
+```java
 public interface ApiDocumentUtils {
 
     static OperationRequestPreprocessor getRequestPreProcessor() {
@@ -144,7 +152,7 @@ public interface ApiDocumentUtils {
 }
 ```
 
-```
+```java
 package com.example.exp0906;
 
 @SpringBootTest
