@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.restapi_ex.mapper.BookMapper">
+
+    <select id="findBookById" parameterType="String" resultType="com.example.restapi_ex.dto.BookDto">
+        SELECT * FROM BOOK WHERE ID = #{id}
+    </select>
+
+    <select id="findAll" resultType="com.example.restapi_ex.dto.BookDto">
+        SELECT * FROM BOOK;
+    </select>
+
+    <!-- 도서 정보 등록 -->
+    <insert id="insertBook" parameterType="com.example.restapi_ex.dto.BookDto">
+        INSERT INTO BOOK (id, title, author)
+        VALUES (#{id}, #{title}, #{author})
+    </insert>
+
+    <!-- 도서 정보 업데이트 -->
+    <update id="updateBook" parameterType="com.example.restapi_ex.dto.BookDto">
+        UPDATE BOOK
+        SET title = #{title}, author = #{author}, publisher = #{publisher}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 도서 정보 삭제 -->
+    <delete id="deleteBookById" parameterType="String">
+        DELETE FROM BOOK WHERE ID = #{id}
+    </delete>
+
+</mapper>
