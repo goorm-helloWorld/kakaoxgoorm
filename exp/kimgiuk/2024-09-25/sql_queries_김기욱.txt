@@ -1,0 +1,53 @@
+--         1. 고객 테이블에서 고객명, 생년월일, 성별 출력
+SELECT clientName, clientBirth, clientGender FROM book.client;
+
+--         2. 고객 테이블에서 주소만 검색하여 출력 (중복되는 주소는 한번만 출력)
+SELECT DISTINCT clientAddress FROM book.client;
+
+--         3. 고객 테이블에서 취미가 '축구'이거나 '등산'인 고객의 고객명, 취미 출력
+SELECT clientName, clientHobby FROM book.client WHERE clientHobby='축구'OR'등산';
+
+--         4. 도서 테이블에서 저자의 두 번째 위치에 '길'이 들어 있는 저자명 출력 (중복되는 저자명은 한번만 출력)
+SELECT DISTINCT bookAuthor FROM book.book WHERE bookAuthor LIKE '%길%';
+
+--         5. 도서 테이블에서 발행일이 2020년인 도서의 도서명, 저자, 발행일 출력
+SELECT bookName, bookAuthor, bookDate FROM book.book WHERE YEAR(bookDate)= 2020;
+
+--         6. 도서판매 테이블에서 고객번호1, 2를 제외한 모든 판매 데이터 출력
+SELECT * FROM book.booksale WHERE clientNo NOT IN('C1', 'C2');
+
+--         7. 고객 테이블에서 취미가 NULL이 아니면서 주소가 '서울'인 고객의 고객명, 주소, 취미 출력
+SELECT clientName, clientAddress, clientHobby FROM book.client WHERE clientHobby IS NOT NULL AND clientAddress LIKE '서울%';
+
+--         8. 도서 테이블에서 가격이 25,000원 이상이면서 저자 이름에 '길동'이 들어가는 도서의 도서명, 저자, 가격, 재고 출력
+SELECT bookName, bookAuthor, bookPrice, bookStock FROM book.book WHERE bookPrice >= 25000 AND bookAuthor LIKE '%길동%';
+
+--         9. 도서 테이블에서 가격이 20,000 ~ 25,000원인 모든 도서 출력
+SELECT * FROM book.book WHERE bookPrice BETWEEN 20000 AND 25000;
+
+--         10. 도서 테이블에서 저자명에 '길동'이 들어 있지 않는 도서의 도서명, 저자 출력
+SELECT bookName, bookAuthor FROM book.book WHERE bookAuthor NOT LIKE '%길동%';
+
+--         11. 도서 테이블에서 가격 순으로 내림차순 정렬하여, 도서명, 저자, 가격 출력(가격이 같으면 저자 순으로 오름차순 정렬)
+SELECT bookName, bookAuthor, bookPrice FROM book.book ORDER BY bookPrice DESC, bookAuthor ASC;
+
+--         12. 도서 테이블에서 저자에 ‘길동’이 들어가는 도서의 총 재고 수량 계산하여 출력
+SELECT SUM(bookStock) AS totalStock FROM book.book WHERE bookAuthor LIKE '%길동%';
+
+--         13.  도서 테이블에서 ‘서울 출판사’ 도서 중 최고가와 최저가 출력
+SELECT MAX(b.bookPrice) AS highestPrice, MIN(b.bookPrice) AS lowestPrice
+FROM book.book b
+INNER JOIN book.publisher p ON b.pubNo = p.pubNo
+WHERE p.pubName='서울 출판사';
+
+--         14. 도서 테이블에서 출판사별로 총 재고수량과 평균 재고 수량 계산하여 출력(’총 재고 수량’으로 내림차순 정렬)
+SELECT pubNo, SUM(bookStock) AS '총 재고 수량', AVG(bookStock) AS '평균 재고 수량'
+FROM book.book
+GROUP BY pubNo
+ORDER BY SUM(bookStock) DESC;
+
+--         15. 도서판매 테이블에서 고객별로 ‘총 주문 수량’과 ‘총 주문 건수’ 출력. 단 주문 건수가 2 이상인 고객만 해당 (HAVING절 조건에는 SUM,AVG,MIN,MAX,COUNT와 같은 집계 함수가 와야합니다.)
+SELECT clientNo, SUM(bsQty) AS '총 주문 수량', COUNT(bsNo) AS '총 주문 건수'
+FROM book.booksale
+GROUP BY clientNo
+HAVING COUNT(bsNo) >= 2;

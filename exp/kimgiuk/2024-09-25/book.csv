@@ -1,0 +1,7 @@
+bookNo,bookName,bookAuthor,bookPrice,bookDate,bookStock,pubNo
+B1,Book One,홍길동,25000,2020-05-20,50,P1
+B2,Book Two,이길동,30000,2020-06-15,30,P1
+B3,Book Three,길상희,18000,2021-03-10,20,P2
+B4,Book Four,김철수,22000,2019-11-25,15,P2
+B5,Seoul Book One,김길동,35000,2021-07-15,40,P3
+B6,Seoul Book Two,이길동,15000,2020-09-10,25,P3

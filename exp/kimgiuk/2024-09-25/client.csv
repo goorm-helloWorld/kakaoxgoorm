@@ -1,0 +1,5 @@
+clientNo,clientName,clientPhone,clientAddress,clientBirth,clientHobby,clientGender
+C1,Alice,010-1234-5678,서울 강남구,1990-01-01,축구,F
+C2,Bob,010-8765-4321,서울 중구,1985-05-20,등산,M
+C3,Charlie,010-5678-1234,서울 강남구,1975-11-12,,M
+C4,David,010-4321-8765,부산 해운대구,1995-08-30,게임,M
