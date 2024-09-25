@@ -1,0 +1,49 @@
+select * from client;
+-- 1. 고객 테이블에서 고객명, 생년월일, 성별 출력
+select clientName, clientBirth, clientGender from client; 
+
+-- 2. 고객 테이블에서 주소만 검색하여 출력 (중복되는 주소는 한번만 출력)
+select distinct clientAddress from client; 
+
+-- 3. 고객 테이블에서 취미가 '축구'이거나 '등산'인 고객의 고객명, 취미 출력
+select clientName, clientHobby from client
+where clientHobby in ('축구', '등산');
+
+select * from Book;
+-- 4. 도서 테이블에서 저자의 두 번째 위치에 '길'이 들어 있는 저자명 출력 (중복되는 저자명은 한번만 출력)
+select bookAuthor from Book
+where bookAuthor LIKE '_길%';
+
+-- 5. 도서 테이블에서 발행일이 2020년인 도서의 도서명, 저자, 발행일 출력
+select bookName, bookAuthor, bookDate
+from book 
+where year(bookDate) = 2020;
+
+select * from booksale;
+-- 6. 도서판매 테이블에서 고객번호1, 2를 제외한 모든 판매 데이터 출력
+select * from booksale
+where clientNo not in('C1', 'C2');
+
+select * from client;
+-- 7. 고객 테이블에서 취미가 NULL이 아니면서 주소가 '서울'인 고객의 고객명, 주소, 취미 출력
+select clientName, clientAddress, clientHobby
+from client
+where clientHobby is not null
+and clientAddress like '서울%';
+
+select * from book;
+-- 8. 도서 테이블에서 가격이 25,000원 이상이면서 저자 이름에 '길동'이 들어가는 도서의 도서명, 저자, 가격, 재고 출력
+select bookName, bookAuthor, bookPrice, bookStock
+from book
+where bookPrice >= 25000
+and bookAuthor like '%길동%';
+
+--  9. 도서 테이블에서 가격이 20,000 ~ 25,000원인 모든 도서 출력
+select * from book
+where bookPrice <= 25000
+and bookPrice >= 20000;
+
+--  10. 도서 테이블에서 저자명에 '길동'이 들어 있지 않는 도서의 도서명, 저자 출력
+select bookName, bookAuthor 
+from book
+where bookAuthor not like '%길동%';
