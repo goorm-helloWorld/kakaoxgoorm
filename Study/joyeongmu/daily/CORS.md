@@ -131,7 +131,7 @@ public class CorsConfig implements WebMvcConfigurer {
 
 브라우저는 서버가 보낸 Response 정보를 이용하여 허용되지 않은 요청인 경우 405 Method Not Allowed 에러를 발생시키고, 실제 페이지의 요청(본 요청)은 서버로 전송하지 않고, 반대로 **허용된 요청인 경우 본 요청을 보낸다.**
 
-브라우저는 XMLHttpRequest가 Cross-Origin 요청인 것을 판단하여 요청에 "Origin:http://localhost:3000" 헤더를 추가한다. 또한 브라우저는 **POST 방식**이며, **Content-Type이 application/x-www-form-urlencoded, multipart/form-data, text/plain에 포함되지 않기** 때문에 Prefight Request 방식으로 보내야 한다는 것을 알고 있다.(simple request가 아닌 것으로 인지 중 -) 그래서 브라우저는 요청에 아래와 같이 헤더 정보를 추가하여 외부 서버로 Preflight Request(예비 요청)을 보낸다.
+브라우저는 XMLHttpRequest가 Cross-Origin 요청인 것을 판단하여 요청에 "Origin:http://localhost:3000" 헤더를 추가한다. 또한 브라우저는 **해당 요청의 HTTP 메서드**를 인지하고 있으며, **Content-Type이 application/x-www-form-urlencoded, multipart/form-data, text/plain에 포함되지 않기** 때문에 Prefight Request 방식으로 보내야 한다는 것을 알고 있다.(simple request가 아닌 것으로 인지 중 -) 그래서 브라우저는 요청에 아래와 같이 헤더 정보를 추가하여 외부 서버로 Preflight Request(예비 요청)을 보낸다.
 
 서버는 **이 preflight Request(예비 요청)에 대한 응답**으로 현재 자신이 어떤 것들을 허용하고 있는지에 대한 **정보를 response header에 담아서 브라우저에게 다시 보내주게 된다.**
 
